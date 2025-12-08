@@ -8455,7 +8455,7 @@ void ixgbe_down(struct ixgbe_adapter *adapter)
 	clear_bit(__IXGBE_RESET_REQUESTED, adapter->state);
 	adapter->flags &= ~IXGBE_FLAG_NEED_LINK_UPDATE;
 
-	del_timer_sync(&adapter->service_timer);
+	timer_delete_sync(&adapter->service_timer);
 
 	if (adapter->num_vfs) {
 		/* Clear EITR Select mapping */
@@ -10705,7 +10705,7 @@ static void ixgbe_sfp_link_config_subtask(struct ixgbe_adapter *adapter)
  **/
 static void ixgbe_service_timer(struct timer_list *t)
 {
-	struct ixgbe_adapter *adapter = from_timer(adapter, t, service_timer);
+	struct ixgbe_adapter *adapter = timer_container_of(adapter, t, service_timer);
 	unsigned long next_event_offset;
 
 	/* poll faster when waiting for link */
