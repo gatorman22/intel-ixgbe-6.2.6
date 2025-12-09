@@ -23,7 +23,7 @@ static const struct ptp_pin_desc e600_pin_cfg[] = {
  *
  * Return: PHC nanosecond time.
  */
-static u64 ixgbe_ptp_read_phc_e600(const struct cyclecounter *cc)
+static u64 ixgbe_ptp_read_phc_e600(struct cyclecounter *cc)
 {
 	struct ixgbe_adapter *adapter =
 		container_of(cc, struct ixgbe_adapter, hw_cc);
